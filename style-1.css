@@ -1,0 +1,205 @@
+/* ============================================================
+   TRA CỨU THÔNG TIN — giao diện kiểu iOS (iPhone)
+   Nền xám nhạt kiểu grouped list, khối trắng bo góc, xanh hệ
+   thống iOS, dùng font hệ thống -apple-system để hiển thị
+   đúng font thật (SF Pro) khi mở trên iPhone. Tự đổi sang
+   giao diện tối theo chế độ Dark Mode của máy.
+   ============================================================ */
+
+:root {
+  --bg: #f2f2f7;
+  --card: #ffffff;
+  --label: #1c1c1e;
+  --secondary: #8e8e93;
+  --separator: rgba(60, 60, 67, 0.12);
+  --blue: #007aff;
+  --green: #34c759;
+  --red: #ff3b30;
+  --fill: #e9e9eb;
+
+  --radius-lg: 14px;
+  --radius-md: 12px;
+
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --card: #1c1c1e;
+    --label: #ffffff;
+    --secondary: #8e8e93;
+    --separator: rgba(84, 84, 88, 0.6);
+    --fill: #2c2c2e;
+  }
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: var(--font);
+  color: var(--label);
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 56px 16px 40px;
+}
+
+/* ---------- Tiêu đề ---------- */
+.page-header { margin-bottom: 28px; }
+
+.page-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--label);
+}
+
+.page-header p {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--secondary);
+}
+
+/* ---------- Nhãn nhóm ---------- */
+.group-label {
+  font-size: 13px;
+  font-weight: 590;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--secondary);
+  padding: 0 4px 6px;
+}
+
+/* ---------- Khối trắng bo góc dùng chung ---------- */
+.card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+}
+
+/* ---------- Ô nhập mã số ---------- */
+#search-input {
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 14px 16px;
+  font-family: var(--font);
+  font-size: 17px;
+  color: var(--label);
+  border-radius: var(--radius-lg);
+  transition: box-shadow .15s ease;
+}
+
+#search-input:focus { box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3); }
+#search-input:disabled { color: var(--secondary); }
+
+/* ---------- Nút Tra cứu ---------- */
+.btn-primary {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--blue);
+  color: #ffffff;
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .1s ease, transform .08s ease;
+}
+
+.btn-primary:active:not(:disabled) { opacity: .75; transform: scale(0.98); }
+
+.btn-primary:disabled {
+  background: var(--fill);
+  color: var(--secondary);
+  cursor: not-allowed;
+}
+
+/* ---------- Trạng thái & gợi ý ---------- */
+.status {
+  margin: 16px 4px 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--secondary);
+}
+.status:empty { display: none; }
+.status.error { color: var(--red); }
+
+.hint {
+  margin: 16px 0 0;
+  padding: 22px 16px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--secondary);
+}
+
+/* ---------- Kết quả ---------- */
+.results { margin-top: 4px; }
+
+.result-card {
+  padding: 4px 16px 8px;
+  margin-top: 14px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 12px 0 2px;
+  padding: 4px 10px;
+  background: var(--green);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  animation: badgePop .3s cubic-bezier(.34, 1.56, .64, 1) both;
+}
+
+@keyframes badgePop {
+  from { opacity: 0; transform: scale(.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge { animation: none; }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--separator);
+}
+.row:last-child { border-bottom: none; }
+
+.row-label { font-size: 15px; color: var(--secondary); flex: none; }
+
+.row-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--label);
+  text-align: right;
+  word-break: break-word;
+}
+
+/* ---------- Chân trang ---------- */
+.footer {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--secondary);
+}

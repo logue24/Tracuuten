@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tra Cứu Thông Tin</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔎</text></svg>">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>Tra Cứu Thông Tin</h1>
+      <p>Nhập mã số để mở hồ sơ</p>
+    </header>
+
+    <div class="group-label">Mã số</div>
+    <div class="card">
+      <input type="text" id="search-input" autocomplete="off" disabled>
+    </div>
+    <button id="search-btn" class="btn-primary" disabled>Tra cứu</button>
+
+    <p id="status" class="status">Đang tải dữ liệu…</p>
+
+    <div id="results" class="results"></div>
+
+    <p class="footer">
+      Cập nhật lần cuối: <span id="updated-time">—</span><br>
+      Tổng số hồ sơ: <span id="record-count">0</span>
+    </p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

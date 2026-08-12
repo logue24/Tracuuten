@@ -144,6 +144,8 @@ body {
   color: var(--secondary);
 }
 
+.hint-error { color: var(--red); font-weight: 500; }
+
 /* ---------- Kết quả ---------- */
 .results { margin-top: 4px; }
 

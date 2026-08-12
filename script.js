@@ -86,8 +86,8 @@ function renderResults(matches, query) {
 
   if (!matches.length) {
     const hint = document.createElement('p');
-    hint.className = 'hint';
-    hint.textContent = `Không có hồ sơ nào khớp với mã số “${query}”. Kiểm tra lại mã số đã nhập.`;
+    hint.className = 'hint hint-error';
+    hint.textContent = `✕ Mã số “${query}” không đúng. Vui lòng kiểm tra và nhập lại đầy đủ.`;
     els.results.appendChild(hint);
     return;
   }
@@ -151,7 +151,7 @@ async function search() {
   const q = normalize(query);
   const fields = SEARCH_FIELDS.length ? SEARCH_FIELDS : headers;
   const matches = records.filter(record =>
-    fields.some(field => normalize(record[field]).includes(q))
+    fields.some(field => normalize(record[field]) === q)
   );
 
   renderResults(matches, query);

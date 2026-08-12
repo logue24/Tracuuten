@@ -144,7 +144,31 @@ body {
   color: var(--secondary);
 }
 
-.hint-error { color: var(--red); font-weight: 500; }
+/* ---------- Trạng thái mã số sai ---------- */
+.empty-state {
+  margin-top: 16px;
+  padding: 32px 20px;
+  text-align: center;
+}
+
+.empty-state svg {
+  display: block;
+  margin: 0 auto 12px;
+  animation: badgePop .3s cubic-bezier(.34, 1.56, .64, 1) both;
+}
+
+.empty-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--label);
+}
+
+.empty-subtitle {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--secondary);
+}
 
 /* ---------- Kết quả ---------- */
 .results { margin-top: 4px; }
@@ -157,7 +181,7 @@ body {
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   margin: 12px 0 2px;
   padding: 4px 10px;
   background: var(--green);
@@ -167,6 +191,8 @@ body {
   border-radius: 999px;
   animation: badgePop .3s cubic-bezier(.34, 1.56, .64, 1) both;
 }
+
+.badge svg { flex: none; }
 
 @keyframes badgePop {
   from { opacity: 0; transform: scale(.6); }

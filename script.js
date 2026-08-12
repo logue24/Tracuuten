@@ -48,6 +48,27 @@ function setStatus(message, isError) {
   els.status.classList.toggle('error', Boolean(isError));
 }
 
+// Tạo icon SVG (đẹp và sắc nét hơn ký tự Unicode ✓/✕ thông thường).
+// 'check' = dấu tích trắng nhỏ, đặt trong huy hiệu xanh khi đúng.
+// 'x-circle' = dấu X trắng trong vòng tròn đỏ, hiện khi mã số sai.
+function createIcon(kind) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('aria-hidden', 'true');
+
+  if (kind === 'check') {
+    svg.setAttribute('width', '12');
+    svg.setAttribute('height', '12');
+    svg.innerHTML = '<path d="M4 12.5l5.5 5.5L20 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+  } else if (kind === 'x-circle') {
+    svg.setAttribute('width', '40');
+    svg.setAttribute('height', '40');
+    svg.innerHTML = '<circle cx="12" cy="12" r="12" fill="var(--red)"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>';
+  }
+  return svg;
+}
+
 async function loadData(loadingMessage) {
   if (loadingMessage) setStatus(loadingMessage, false);
   try {
@@ -85,10 +106,22 @@ function renderResults(matches, query) {
   els.results.innerHTML = '';
 
   if (!matches.length) {
-    const hint = document.createElement('p');
-    hint.className = 'hint hint-error';
-    hint.textContent = `✕ Mã số “${query}” không đúng. Vui lòng kiểm tra và nhập lại đầy đủ.`;
-    els.results.appendChild(hint);
+    const wrap = document.createElement('div');
+    wrap.className = 'empty-state';
+
+    wrap.appendChild(createIcon('x-circle'));
+
+    const title = document.createElement('p');
+    title.className = 'empty-title';
+    title.textContent = 'Mã số không đúng';
+    wrap.appendChild(title);
+
+    const subtitle = document.createElement('p');
+    subtitle.className = 'empty-subtitle';
+    subtitle.textContent = `Kiểm tra và nhập lại đầy đủ mã số “${query}”.`;
+    wrap.appendChild(subtitle);
+
+    els.results.appendChild(wrap);
     return;
   }
 
@@ -105,7 +138,8 @@ function renderResults(matches, query) {
 
     const badge = document.createElement('span');
     badge.className = 'badge';
-    badge.textContent = '✓ Đã xác nhận';
+    badge.appendChild(createIcon('check'));
+    badge.appendChild(document.createTextNode('Đã xác nhận'));
     card.appendChild(badge);
 
     headers.forEach(h => {

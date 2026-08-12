@@ -29,7 +29,6 @@ const els = {
   status: document.getElementById('status'),
   results: document.getElementById('results'),
   updated: document.getElementById('updated-time'),
-  count: document.getElementById('record-count'),
 };
 
 function stripDiacritics(str) {
@@ -72,7 +71,6 @@ async function loadData(loadingMessage) {
       });
 
     els.updated.textContent = new Date().toLocaleString('vi-VN', { dateStyle: 'medium', timeStyle: 'medium' });
-    els.count.textContent = String(records.length);
 
     setStatus('', false);
     return true;
